@@ -2,8 +2,7 @@
   "name": "@wonderchain/api-client",
   "version": "0.0.1",
   "description": "",
-  "author": "",
-  "private": true,
+  "author": "wonderchain",
   "license": "UNLICENSED",
   "scripts": {
     "clean": "rimraf src dist",
