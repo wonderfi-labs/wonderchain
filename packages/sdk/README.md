@@ -1,4 +1,4 @@
-# @wonderchain/api-client
+# @wonderchain/sdk
 
 ![npm](https://img.shields.io/npm/v/@wonderchain/api-client)
 ![license](https://img.shields.io/npm/l/@wonderchain/api-client)
