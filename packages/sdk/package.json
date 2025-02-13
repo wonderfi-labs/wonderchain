@@ -10,7 +10,7 @@
     "url": "https://github.com/wonderfi-labs/wonderchain.git"
   },
   "scripts": {
-    "clean": "rimraf src dist",
+    "clean": "rm -rf src/api-client src/contracts dist",
     "generate": "openapi-generator-cli generate -i ../../../layer2/packages/api/build/swagger.json -g typescript-axios -o src/api-client --skip-validate-spec",
     "typechain": "typechain --target=ethers-v6 --out-dir ./src/contracts ./abis/*.json && tsc -b tsconfig.json",
     "build": "yarn clean && yarn generate && yarn typechain && tsc",
