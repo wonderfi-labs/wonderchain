@@ -3,11 +3,13 @@
   "version": "0.0.1",
   "description": "",
   "author": "wonderchain",
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "clean": "rimraf src dist",
     "generate": "openapi-generator-cli generate -i ../../../layer2/packages/api/build/swagger.json -g typescript-axios -o src --skip-validate-spec",
-    "build": "yarn clean && yarn generate && tsc"
+    "build": "yarn clean && yarn generate && tsc",
+    "publish-npm": "npm publish --access public"
   },
   "main": "dist",
   "dependencies": {
