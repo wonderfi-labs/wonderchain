@@ -9,11 +9,11 @@ Use the api client to generate
 
 ## Installation
 ```sh
-npm install your-package-name
+npm install @wonderchain/sdk zksync-ethers
 ```
 Or with yarn:
 ```sh
-yarn add your-package-name
+yarn add @wonderchain/sdk zksync-ethers
 ```
 
 ## Usage
@@ -23,11 +23,15 @@ import { Configuration, NetworkApi, Faucetfactory } from "@layer2/api-client";
 import { Provider, utils, Wallet } from "zksync-ethers";
 
 const apiHost = 'https://api.wonderchain.org';
-const chainId = 96371; // testnet
+
+// testnet config
+const chainId = 96371;
 const rpcUrl = 'https://rpc.testnet.wonderchain.org';
 
-const WalletProvider = new Provider(rpcUrl);
-const wallet = new Wallet(PRIVATE_KEY, WalletProvider);
+const provider = new Provider(rpcUrl);
+
+// or use a browser wallet
+const wallet = new Wallet(PRIVATE_KEY, provider);
 
 const config = new Configuration({
     basePath: apiHost,
@@ -44,9 +48,11 @@ const paymasterParams = await networkApi.paymasterParams(
     (await wallet.getNonce()).toString()
 );
 
-const provider = new Provider(rpcUrl);
 
+// example abi to connect
 const faucet = Faucetfactory.connect(faucetParams.data.data.address, provider);
+
+// hydrate the transaction with paymaster parameters
 const data = await faucet.drip.populateTransaction(faucetParams.data.data.signature, {
     type: utils.EIP712_TX_TYPE,
     from: wallet.address,
@@ -58,6 +64,8 @@ const data = await faucet.drip.populateTransaction(faucetParams.data.data.signat
     }),
     },
 });
+
+// broadcast the transaction
 const tx = await wallet.sendTransaction(data);
 await tx.wait();
 
