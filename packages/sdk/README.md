@@ -19,7 +19,7 @@ yarn add @wonderchain/sdk zksync-ethers
 ## Usage
 ```js
 
-import { Configuration, NetworkApi, Faucet__factory } from "@layer2/api-client";
+import { Configuration, NetworkApi, Faucet__factory } from "@wonderchain/sdk";
 import { Provider, utils, Wallet } from "zksync-ethers";
 
 const apiHost = 'https://api.wonderchain.org';
