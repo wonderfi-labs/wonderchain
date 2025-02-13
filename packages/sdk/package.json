@@ -1,5 +1,5 @@
 {
-  "name": "@wonderchain/api-client",
+  "name": "@wonderchain/sdk",
   "version": "0.0.6",
   "description": "",
   "author": "wonderchain",
@@ -7,17 +7,23 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wonderfi-labs/wonderchain/tree/main/packages/api-client"
+    "url": "https://github.com/wonderfi-labs/wonderchain.git"
   },
   "scripts": {
     "clean": "rimraf src dist",
-    "generate": "openapi-generator-cli generate -i ../../../layer2/packages/api/build/swagger.json -g typescript-axios -o src --skip-validate-spec",
-    "build": "yarn clean && yarn generate && tsc",
+    "generate": "openapi-generator-cli generate -i ../../../layer2/packages/api/build/swagger.json -g typescript-axios -o src/api-client --skip-validate-spec",
+    "typechain": "typechain --target=ethers-v6 --out-dir ./src/contracts ./abis/*.json && tsc -b tsconfig.json",
+    "build": "yarn clean && yarn generate && yarn typechain && tsc",
     "publish-npm": "npm publish --access public"
   },
   "main": "dist",
   "dependencies": {
-    "@openapitools/openapi-generator-cli": "^2.13.4"
+    "@openapitools/openapi-generator-cli": "^2.13.4",
+    "@typechain/ethers-v6": "^0.5.1",
+    "ethers": "6",
+    "typechain": "^8.3.2",
+    "typechain-target-ethers-v6": "^0.1.0",
+    "zksync-ethers": "^6.15.4"
   },
   "publishConfig": {
     "access": "public"
