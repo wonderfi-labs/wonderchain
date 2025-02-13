@@ -1,0 +1,38 @@
+{
+  "name": "@wonderchain/api-client",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "clean": "rimraf src dist",
+    "generate": "openapi-generator-cli generate -i ../../../layer2/packages/api/build/swagger.json -g typescript-axios -o src --skip-validate-spec",
+    "build": "yarn clean && yarn generate && tsc"
+  },
+  "main": "dist",
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.13.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}

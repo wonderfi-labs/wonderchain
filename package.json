@@ -1,0 +1,16 @@
+{
+  "name": "wonderchain",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "publish": "lerna publish"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^8.1.7"
+  },
+  "version": "0.0.1"
+}
