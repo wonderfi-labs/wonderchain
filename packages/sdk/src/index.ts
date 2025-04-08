@@ -1,4 +1,5 @@
 export * from './api-client';
 export * from './contracts';
 export * from './constants';
-export * from './utils';
+export * from './transactions';
+export * from './contract-factory';

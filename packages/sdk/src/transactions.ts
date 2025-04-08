@@ -1,43 +1,20 @@
-import { Factory__factory, Faucet__factory, Paymaster__factory } from "./contracts"
 import { Provider, utils } from "zksync-ethers";
 import { EIP712_TYPES, EIP712Signer } from "zksync-ethers/build/signer";
-import { getConfig } from "./config";
 import { getNetworkApi } from "./api";
 import { TransactionLike } from "zksync-ethers/build/types";
 import { BytesLike } from "ethers";
 
-export const getFactory = async (provider: Provider) => {
-    const config = await getConfig(provider);
-    if (!config) {
-        return null
-    }
-
-    return Factory__factory.connect(config.ADDRESSES.FACTORY, provider);
+export type TypedTransactionData = {
+    domain: {
+        name: string;
+        version: string;
+        chainId: number;
+    },
+    types: typeof EIP712_TYPES;
+    primaryType: 'Transaction';
+    message: any;
 }
-
-export const getFaucet = async (provider: Provider) => {
-    const config = await getConfig(provider);
-    if (!config) {
-        return null
-    }
-
-    return Faucet__factory.connect(config.ADDRESSES.FAUCET, provider);
-}
-
-export const getPaymaster = async (provider: Provider) => {
-    const config = await getConfig(provider);
-    if (!config) {
-        return null
-    }
-    return Paymaster__factory.connect(config.ADDRESSES.PAYMASTER, provider);
-}
-
-export const addPaymasterData = async (provider: Provider, input: {
-    from: string;
-    to: string;
-    data: string;
-    value: string;
-}) => {
+export const addPaymasterData = async (provider: Provider, input: TransactionLike) => {
     const networkApi = await getNetworkApi(provider);
     if (!networkApi) {
         return null
@@ -51,7 +28,7 @@ export const addPaymasterData = async (provider: Provider, input: {
         chainId,
         input.from,
         input.to,
-        input.value,
+        input.value.toLocaleString(),
         (nonce).toString()
     );
 
@@ -87,7 +64,7 @@ export const addPaymasterData = async (provider: Provider, input: {
     return tx;
 }
 
-export const txToTypedData = async (provider: Provider, tx: TransactionLike) => {
+export const txToTypedData = async (provider: Provider, tx: TransactionLike): Promise<TypedTransactionData> => {
     const network = await provider.getNetwork();
     const chainId = parseInt(network.chainId.toString(), 10);
     return {
@@ -102,12 +79,30 @@ export const txToTypedData = async (provider: Provider, tx: TransactionLike) => 
     };
 }
 
-export const addSignatureAndSerialize = async (tx: TransactionLike, customSignature: BytesLike) => {
-    return utils.serializeEip712({
+export const addSignature = (tx: TransactionLike, customSignature: BytesLike): TransactionLike => {
+    return {
         ...tx,
         customData: {
             ...tx.customData,
             customSignature,
         }
-    })
+    }
+}
+
+export const serialize = (tx: TransactionLike, ): string => {
+    return utils.serializeEip712(tx);
+}
+
+export const sendTransaction = async (provider: Provider, input: TransactionLike, signTypedData: (data: any) => Promise<BytesLike>): Promise<TransactionLike>=> {
+    const tx = await addPaymasterData(provider, input);
+    if (!tx) {
+        return null
+    }
+
+    const signature = await signTypedData(await txToTypedData(provider, tx));
+
+    const signedTx = addSignature(tx, signature);
+
+    const resp = await provider.broadcastTransaction(serialize(signedTx));
+    return resp;
 }
