@@ -3,7 +3,7 @@ import { Provider, utils } from "zksync-ethers";
 import { EIP712_TYPES, EIP712Signer } from "zksync-ethers/build/signer";
 import { getConfig } from "./config";
 import { getNetworkApi } from "./api";
-import { TransactionRequest } from "zksync-ethers/build/types";
+import { TransactionLike } from "zksync-ethers/build/types";
 import { BytesLike } from "ethers";
 
 export const getFactory = async (provider: Provider) => {
@@ -55,7 +55,7 @@ export const addPaymasterData = async (provider: Provider, input: {
         (nonce).toString()
     );
 
-    const tx: TransactionRequest = {
+    const tx: TransactionLike = {
         ...input,
         customData: {
             paymasterParams: utils.getPaymasterParams(paymasterParams.data.data.address, {
@@ -87,7 +87,7 @@ export const addPaymasterData = async (provider: Provider, input: {
     return tx;
 }
 
-export const txToTypedData = async (provider: Provider, tx: TransactionRequest) => {
+export const txToTypedData = async (provider: Provider, tx: TransactionLike) => {
     const network = await provider.getNetwork();
     const chainId = parseInt(network.chainId.toString(), 10);
     return {
@@ -97,17 +97,17 @@ export const txToTypedData = async (provider: Provider, tx: TransactionRequest) 
             chainId,
         },
         types: EIP712_TYPES,
-        primaryType: 'Transaction',
+        primaryType: 'Transaction' as 'Transaction',
         message: EIP712Signer.getSignInput(tx),
     };
 }
 
-export const addSignature = async (tx: TransactionRequest, customSignature: BytesLike) => {
-    return {
+export const addSignatureAndSerialize = async (tx: TransactionLike, customSignature: BytesLike) => {
+    return utils.serializeEip712({
         ...tx,
         customData: {
             ...tx.customData,
             customSignature,
         }
-    }
+    })
 }
