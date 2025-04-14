@@ -1,12 +1,10 @@
-import { Provider } from "zksync-ethers";
 import { CONFIG } from "./constants";
 
-export const getConfig = async (provider: Provider) => {
-        if (!provider) {
+export const getConfig = (chainId: string | number) => {
+        if (!chainId) {
             return null
         }
-        const network = await provider.getNetwork();
-        const config = CONFIG[network.chainId.toString()];
+        const config = CONFIG[chainId.toString()];
         if (!config) {
             return null
         }

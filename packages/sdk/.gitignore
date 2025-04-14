@@ -1,5 +1,7 @@
 node_modules
 swagger.json
 src/api-client
+src/blockscout-client
 src/contracts
 dist
+blockscout-swagger.json

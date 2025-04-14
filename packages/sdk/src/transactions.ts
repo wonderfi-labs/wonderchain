@@ -15,14 +15,15 @@ export type TypedTransactionData = {
     message: any;
 }
 export const addPaymasterData = async (provider: Provider, input: TransactionLike) => {
-    const networkApi = await getNetworkApi(provider);
+    const network = await provider.getNetwork();
+    const chainId = parseInt(network.chainId.toString(), 10);
+
+    const networkApi = await getNetworkApi(chainId);
     if (!networkApi) {
         return null
     }
 
     const nonce = await provider.getTransactionCount(input.from);
-    const network = await provider.getNetwork();
-    const chainId = parseInt(network.chainId.toString(), 10);
 
     const paymasterParams = await networkApi.paymasterParams(
         chainId,

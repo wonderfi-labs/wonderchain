@@ -1,3 +1,4 @@
+export * from './api';
 export * from './api-client';
 export * from './contracts';
 export * from './constants';
