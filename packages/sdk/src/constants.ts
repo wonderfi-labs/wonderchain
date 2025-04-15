@@ -11,6 +11,7 @@ export const CONFIG: {
             WONDER_API: string;
             BLOCKSCOUT: string;
             RPC: string;
+            EXPLORER: string;
         },
     }
 } = {
@@ -26,6 +27,7 @@ export const CONFIG: {
             WONDER_API: 'https://api.wonderchain.org',
             BLOCKSCOUT: 'https://zksync-sepolia.blockscout.com/api/v2',
             RPC: 'https://sepolia.era.zksync.dev',
+            EXPLORER: 'https://zksync-sepolia.blockscout.com',
         },
     },
     '324': {
@@ -35,6 +37,7 @@ export const CONFIG: {
             WONDER_API: 'https://api.wonderchain.org',
             BLOCKSCOUT: 'https://zksync.blockscout.com/api/v2',
             RPC: 'https://mainnet.era.zksync.io',
+            EXPLORER: 'https://zksync.blockscout.com',
         },
     },
     '96371': {
@@ -49,6 +52,7 @@ export const CONFIG: {
             WONDER_API: 'https://api.wonderchain.org',
             BLOCKSCOUT: '',
             RPC: 'http://rpc.testnet.wonderchain.org/',
+            EXPLORER: 'https://testnet-explorer.wonderchain.org',
         },
     },
 };

@@ -35,7 +35,7 @@ export const getPaymaster = async (provider: Provider) => {
     if (!config.ADDRESSES.PAYMASTER) {
         return null
     }
-    return Recorder__factory.connect(config.ADDRESSES.PAYMASTER, provider);
+    return Paymaster__factory.connect(config.ADDRESSES.PAYMASTER, provider);
 }
 
 export const getRecorder = async (provider: Provider) => {
@@ -47,7 +47,7 @@ export const getRecorder = async (provider: Provider) => {
     if (!config.ADDRESSES.RECORDER) {
         return null
     }
-    return Paymaster__factory.connect(config.ADDRESSES.RECORDER, provider);
+    return Recorder__factory.connect(config.ADDRESSES.RECORDER, provider);
 }
 
 export const getERC20 = async (provider: Provider, contractAddress: string) => {
