@@ -51,7 +51,7 @@ export const CONFIG: {
         URLS: {
             WONDER_API: 'https://api.wonderchain.org',
             BLOCKSCOUT: 'https://testnet-blockscout.wonderchain.org/api/v2',
-            RPC: 'http://rpc.testnet.wonderchain.org/',
+            RPC: 'https://rpc.testnet.wonderchain.org/',
             EXPLORER: 'https://testnet-blockscout.wonderchain.org',
         },
     },
