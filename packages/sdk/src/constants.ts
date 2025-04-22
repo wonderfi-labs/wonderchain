@@ -43,9 +43,9 @@ export const CONFIG: {
     '96371': {
         id: 'wonder-sepolia',
         ADDRESSES: {
-            FACTORY: '0xE96Ce8D9382826Bc8C8aCf76158F7D9AC44ABe57',
+            FACTORY: '0x4a00104793F59e857592146658eC4a4751de224f',
             FAUCET: '0x0d0A98A3f88d6604d6d8B07bB60a79444C42f4bC',
-            PAYMASTER: '0x4a00104793F59e857592146658eC4a4751de224f',   
+            PAYMASTER: '0x1cf380DABAFb3a9B2f69017D9d645fBf6D103803',   
             RECORDER: '0xB992469518d03b733959ff027b39773bC4631abC', 
         },
         URLS: {
