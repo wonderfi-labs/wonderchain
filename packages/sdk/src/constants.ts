@@ -1,6 +1,7 @@
 export const CONFIG: {
     [key: string]: {
         id: string;
+        name: string;
         ADDRESSES: {
             FACTORY?: string;
             FAUCET?: string;
@@ -17,6 +18,7 @@ export const CONFIG: {
 } = {
     '300': {
         id: 'zksync-sepolia',
+        name: 'ZkSync Sepolia',
         ADDRESSES: {
             FACTORY: '0xD0864BA18b2275feB328c096a14f1338df775e69',
             FAUCET: '0xa57e5f45533B9eB122ca1A3667657C273B41535E',
@@ -32,6 +34,7 @@ export const CONFIG: {
     },
     '324': {
         id: 'zksync-mainnet',
+        name: 'ZkSync',
         ADDRESSES: {},
         URLS: {
             WONDER_API: 'https://api.wonderchain.org',
@@ -42,6 +45,7 @@ export const CONFIG: {
     },
     '96371': {
         id: 'wonder-sepolia',
+        name: 'Wonder Sepolia',
         ADDRESSES: {
             FACTORY: '0x4a00104793F59e857592146658eC4a4751de224f',
             FAUCET: '0x0d0A98A3f88d6604d6d8B07bB60a79444C42f4bC',
@@ -53,6 +57,21 @@ export const CONFIG: {
             BLOCKSCOUT: 'https://testnet-blockscout.wonderchain.org/api/v2',
             RPC: 'https://rpc.testnet.wonderchain.org/',
             EXPLORER: 'https://testnet-blockscout.wonderchain.org',
+        },
+    },
+    '9637': {
+        id: 'wonder-mainnet',
+        name: 'Wonder',
+        ADDRESSES: {
+            FACTORY: '0x1cf380DABAFb3a9B2f69017D9d645fBf6D103803',
+            PAYMASTER: '0x5F385AbC3b2340cD7f4362625B22b16EFaC605b3',   
+            RECORDER: '0x0d0A98A3f88d6604d6d8B07bB60a79444C42f4bC', 
+        },
+        URLS: {
+            WONDER_API: 'https://api.wonderchain.org',
+            BLOCKSCOUT: 'https://mainnet-blockscout.wonderchain.org/api/v2',
+            RPC: 'https://rpc.mainnet.wonderchain.org/',
+            EXPLORER: 'https://mainnet-blockscout.wonderchain.org',
         },
     },
 };
